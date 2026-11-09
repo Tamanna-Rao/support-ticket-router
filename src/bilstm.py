@@ -93,11 +93,28 @@ class BiLSTMClassifier(nn.Module):
         return self.fc(self.drop(feats))
 
 
-def load_glove_matrix(itos, dim):
+def load_glove_vectors(dim):
+    """Try gensim's own download first; if its server is down, use the Hugging Face copy."""
+    import glob
+
     import gensim.downloader as api
 
+    name = f"glove-wiki-gigaword-{dim}"
+    try:
+        return api.load(name)
+    except Exception as e:
+        print(f"gensim download failed ({e}). Trying the Hugging Face copy instead...")
+    from gensim.models import KeyedVectors
+    from huggingface_hub import snapshot_download
+
+    folder = snapshot_download(repo_id=f"fse/{name}")
+    model_file = glob.glob(os.path.join(folder, "*.model"))[0]
+    return KeyedVectors.load(model_file)
+
+
+def load_glove_matrix(itos, dim):
     print(f"Loading GloVe {dim}d (downloads ~130 MB the first time)...")
-    glove = api.load(f"glove-wiki-gigaword-{dim}")
+    glove = load_glove_vectors(dim)
     matrix = np.random.normal(0, 0.1, (len(itos), dim)).astype("float32")
     matrix[PAD] = 0
     hits = 0
