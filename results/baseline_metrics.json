@@ -1,0 +1,10 @@
+{
+  "tfidf_logreg_raw": {
+    "accuracy": 0.8938311688311689,
+    "macro_f1": 0.8941886071786473
+  },
+  "tfidf_logreg_preprocessed": {
+    "accuracy": 0.8727272727272727,
+    "macro_f1": 0.8729126169578938
+  }
+}
