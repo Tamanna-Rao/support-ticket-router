@@ -6,3 +6,5 @@ numpy
 matplotlib
 joblib
 streamlit
+   torch
+   transformers
