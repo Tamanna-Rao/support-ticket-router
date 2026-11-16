@@ -370,8 +370,6 @@ if review_t > auto_t:
     st.sidebar.warning("The triage threshold should not be higher than the auto-route threshold.")
 st.sidebar.caption("Tickets between the two thresholds are routed but flagged for review. "
                    "Defaults come from the validation-set analysis.")
-st.sidebar.divider()
-st.sidebar.markdown(f"[GitHub repository]({GITHUB_URL})  \n[Model on Hugging Face]({MODEL_URL})")
 st.sidebar.caption("DistilBERT fine-tuned on Banking77")
 
 
@@ -797,7 +795,6 @@ pip install -r requirements.txt
 streamlit run app/app.py
 ```
 
-**Links:** [GitHub repository]({GITHUB_URL}) | [Model on Hugging Face]({MODEL_URL})
         """
     )
 
