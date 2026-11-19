@@ -6,5 +6,6 @@ numpy
 matplotlib
 joblib
 streamlit
+altair
    torch
    transformers
